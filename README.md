@@ -1,4 +1,4 @@
-# VPM Package Template
+# VRCAvatarLatencyProbe
 
 Starter for making Packages, including automation for building and publishing them.
 
@@ -22,11 +22,10 @@ Full details at [Converting Assets to a VPM Package](https://vcc.docs.vrchat.com
 
 ## ✏️ Working on Your Package
 
-* Delete the "Packages/com.vrchat.demo-template" directory or reuse it for your own package.
-  * If you reuse the package, don't forget to rename it and add generated meta files to your repository!
+* Use your package directory in `Packages/tokyo.chigiri.pasocommate.vrcavatarlatencyprobe`.
 * Update the `.gitignore` file in the "Packages" directory to include your package.
-  * For example, change `!com.vrchat.demo-template` to `!com.username.package-name`.
-  * `.gitignore` files normally *exclude* the contents of your "Packages" directory. This `.gitignore` in this template show how to *include* the demo package. You can easily change this out for your own package name.
+  * For example, use `!tokyo.chigiri.pasocommate.vrcavatarlatencyprobe`.
+  * `.gitignore` files normally *exclude* the contents of your "Packages" directory. This `.gitignore` in this template shows how to *include* your target package.
 * Open the Unity project and work on your package's files in your favorite code editor.
 * When you're ready, commit and push your changes.
 * Once you've set up the automation as described below, you can easily publish new versions.
@@ -37,7 +36,7 @@ Create a repository variable with the name and value described below.
 For details on how to create repository variables, see [Creating Configuration Variables for a Repository](https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository).
 Make sure you are creating a **repository variable**, and not a **repository secret**.
 
-* `PACKAGE_NAME`: the name of your package, like `com.vrchat.demo-template`.
+* `PACKAGE_NAME`: the name of your package, like `tokyo.chigiri.pasocommate.vrcavatarlatencyprobe`.
 
 Finally, go to the "Settings" page for your repo, then choose "Pages", and look for the heading "Build and deployment". Change the "Source" dropdown from "Deploy from a branch" to "GitHub Actions".
 
