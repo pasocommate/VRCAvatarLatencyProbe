@@ -1,0 +1,15 @@
+{
+  "name": "tokyo.chigiri.pasocommate.vrcavatarlatencyprobe",
+  "displayName": "VRCAvatarLatencyProbe",
+  "version": "1.0.0",
+  "description": "Avatar latency measurement booth toolkit for VRChat worlds.",
+  "unity": "2022.3",
+  "license": "MIT",
+  "author": {
+    "name": "Chigiri Tsutsumi"
+  },
+  "gitDependencies": {},
+  "vpmDependencies": {
+    "com.vrchat.worlds": ">=3.10.2"
+  }
+}
