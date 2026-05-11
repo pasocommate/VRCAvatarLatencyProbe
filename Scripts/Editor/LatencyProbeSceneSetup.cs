@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using PasocomMate.VRCAvatarLatencyProbe;
 using System.Reflection;
 using TMPro;
 using UdonSharp;
