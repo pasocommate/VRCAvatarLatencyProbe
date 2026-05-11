@@ -225,6 +225,12 @@
         "com.unity.ai.navigation": "1.1.5"
       }
     },
+    "net.narazaka.vrchat.tmp-fallback-fonts-jp": {
+      "version": "file:net.narazaka.vrchat.tmp-fallback-fonts-jp",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "tokyo.chigiri.pasocommate.vrcavatarlatencyprobe": {
       "version": "file:tokyo.chigiri.pasocommate.vrcavatarlatencyprobe",
       "depth": 0,
