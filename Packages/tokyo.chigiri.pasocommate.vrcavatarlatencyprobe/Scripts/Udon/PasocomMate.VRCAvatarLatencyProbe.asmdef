@@ -1,6 +1,6 @@
 {
-    "name": "VRCAvatarLatencyProbe",
-    "rootNamespace": "",
+    "name": "PasocomMate.VRCAvatarLatencyProbe",
+    "rootNamespace": "PasocomMate.VRCAvatarLatencyProbe",
     "references": [
         "UdonSharp.Runtime",
         "VRC.Udon",
