@@ -74,6 +74,8 @@ public static class UndergroundProbeSceneSetup
     private const string GUID_ANIM_IDLE          = "256cc7bcbebda6046902b92f46673ece";
     private const string GUID_ANIM_OPEN_CLOSE    = "4dece46b15b82d14a8fe190a5f090591";
     private const string GUID_UDON_BOOTH_BUTTON  = "3782d6a2c80db544ebf96a0e0e41c166";
+    private const string GUID_FONT_EMPTY_SDF     = "b0cf90c18247f154094021e2de9bf529";
+    private const string GUID_FONT_NOTO_FALLBACK = "32134e5dc8c950c4cb5bb7deaae7d539";
 
     // ================================================================
     // メニュー項目
@@ -91,8 +93,44 @@ public static class UndergroundProbeSceneSetup
     // オブジェクト生成
     // ================================================================
 
+    private static void EnsureTMPSettings()
+    {
+        var setting = TMP_Settings.instance;
+        if (setting == null)
+        {
+            Debug.LogWarning("[LatencyProbe] TMP Settings が見つかりません。Edit→Project Settings→TextMesh Pro から TMP Essentials をインポートしてください。");
+            return;
+        }
+        var emptySdf     = LoadAssetByGuid<TMP_FontAsset>(GUID_FONT_EMPTY_SDF);
+        var notoFallback = LoadAssetByGuid<TMP_FontAsset>(GUID_FONT_NOTO_FALLBACK);
+        if (emptySdf == null || notoFallback == null)
+        {
+            Debug.LogWarning("[LatencyProbe] tmp-fallback-fonts-jp のフォントアセットが見つかりません。");
+            return;
+        }
+        var so = new SerializedObject(setting);
+        so.Update();
+        so.FindProperty("m_defaultFontAsset").objectReferenceValue = emptySdf;
+        var fallbackList = so.FindProperty("m_fallbackFontAssets");
+        bool found = false;
+        for (int i = 0; i < fallbackList.arraySize; i++)
+        {
+            if (fallbackList.GetArrayElementAtIndex(i).objectReferenceValue == notoFallback)
+            { found = true; break; }
+        }
+        if (!found)
+        {
+            fallbackList.arraySize++;
+            fallbackList.GetArrayElementAtIndex(fallbackList.arraySize - 1).objectReferenceValue = notoFallback;
+        }
+        so.ApplyModifiedProperties();
+        AssetDatabase.SaveAssets();
+    }
+
     private static void CreateObjects()
     {
+        EnsureTMPSettings();
+
         // 既存を削除
         GameObject existing;
         while ((existing = GameObject.Find(ROOT_NAME)) != null
@@ -264,6 +302,7 @@ public static class UndergroundProbeSceneSetup
         // StatusText
         GameObject statusGo = CreateChild(displayGo, "StatusText");
         var statusText = statusGo.AddComponent<TextMeshProUGUI>();
+        statusText.font = LoadAssetByGuid<TMP_FontAsset>(GUID_FONT_EMPTY_SDF);
         statusText.fontSize = 26;
         statusText.color = Color.white;
         statusText.alignment = TextAlignmentOptions.TopLeft;
@@ -277,6 +316,7 @@ public static class UndergroundProbeSceneSetup
         // LogText
         GameObject logGo = CreateChild(displayGo, "LogText");
         var logText = logGo.AddComponent<TextMeshProUGUI>();
+        logText.font = LoadAssetByGuid<TMP_FontAsset>(GUID_FONT_EMPTY_SDF);
         logText.fontSize = 27;
         logText.color = Color.white;
         logText.alignment = TextAlignmentOptions.TopLeft;
@@ -328,6 +368,7 @@ public static class UndergroundProbeSceneSetup
 
         GameObject hudTextGo = CreateChild(hudGo, "HUDText");
         var hudText = hudTextGo.AddComponent<TextMeshProUGUI>();
+        hudText.font = LoadAssetByGuid<TMP_FontAsset>(GUID_FONT_EMPTY_SDF);
         hudText.fontSize = 27;
         hudText.color = Color.white;
         hudText.alignment = TextAlignmentOptions.Center;

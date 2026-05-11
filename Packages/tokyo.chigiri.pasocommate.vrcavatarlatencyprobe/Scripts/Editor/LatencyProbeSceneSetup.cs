@@ -42,6 +42,8 @@ public static class LatencyProbeSceneSetup
     private const string GUID_MAT_BEACON_GREEN      = "dad2e652b07f83446b9ce1e6bcfec94d";
     private const string GUID_MAT_BEACON_RED        = "d6a92bc33a2b4474f99aafb6a4e5361d";
     private const string GUID_BOOTH_BUTTON_ASSET    = "3782d6a2c80db544ebf96a0e0e41c166";
+    private const string GUID_FONT_EMPTY_SDF        = "b0cf90c18247f154094021e2de9bf529";
+    private const string GUID_FONT_NOTO_FALLBACK    = "32134e5dc8c950c4cb5bb7deaae7d539";
 
     // Canvas の論理解像度 (pixels)。transform.localScale で世界空間サイズに変換する。
     // 1px = 1mm → scale = 0.001
@@ -85,8 +87,44 @@ public static class LatencyProbeSceneSetup
     // Step 1 実装
     // ----------------------------------------------------------------
 
+    private static void EnsureTMPSettings()
+    {
+        var setting = TMP_Settings.instance;
+        if (setting == null)
+        {
+            Debug.LogWarning("[LatencyProbe] TMP Settings が見つかりません。Edit→Project Settings→TextMesh Pro から TMP Essentials をインポートしてください。");
+            return;
+        }
+        var emptySdf    = LoadAssetByGuid<TMP_FontAsset>(GUID_FONT_EMPTY_SDF);
+        var notoFallback = LoadAssetByGuid<TMP_FontAsset>(GUID_FONT_NOTO_FALLBACK);
+        if (emptySdf == null || notoFallback == null)
+        {
+            Debug.LogWarning("[LatencyProbe] tmp-fallback-fonts-jp のフォントアセットが見つかりません。");
+            return;
+        }
+        var so = new SerializedObject(setting);
+        so.Update();
+        so.FindProperty("m_defaultFontAsset").objectReferenceValue = emptySdf;
+        var fallbackList = so.FindProperty("m_fallbackFontAssets");
+        bool found = false;
+        for (int i = 0; i < fallbackList.arraySize; i++)
+        {
+            if (fallbackList.GetArrayElementAtIndex(i).objectReferenceValue == notoFallback)
+            { found = true; break; }
+        }
+        if (!found)
+        {
+            fallbackList.arraySize++;
+            fallbackList.GetArrayElementAtIndex(fallbackList.arraySize - 1).objectReferenceValue = notoFallback;
+        }
+        so.ApplyModifiedProperties();
+        AssetDatabase.SaveAssets();
+    }
+
     private static void CreateObjects()
     {
+        EnsureTMPSettings();
+
         // 既存オブジェクトがあれば全て削除（重複防止）
         GameObject existing;
         while ((existing = GameObject.Find("LatencyProbeBooth")) != null
@@ -141,6 +179,7 @@ public static class LatencyProbeSceneSetup
         // ---- StatusText（上部ステータスエリア）----
         GameObject statusGo = CreateChild(displayGo, "StatusText");
         var statusText = statusGo.AddComponent<TextMeshProUGUI>();
+        statusText.font = LoadAssetByGuid<TMP_FontAsset>(GUID_FONT_EMPTY_SDF);
         statusText.fontSize = 26;
         statusText.color = Color.white;
         statusText.alignment = TextAlignmentOptions.TopLeft;
@@ -154,6 +193,7 @@ public static class LatencyProbeSceneSetup
         // ---- LogText（下部結果エリア — 計測結果を永続表示）----
         GameObject logGo = CreateChild(displayGo, "LogText");
         var logText = logGo.AddComponent<TextMeshProUGUI>();
+        logText.font = LoadAssetByGuid<TMP_FontAsset>(GUID_FONT_EMPTY_SDF);
         logText.fontSize = 27;
         logText.color = Color.white;
         logText.alignment = TextAlignmentOptions.TopLeft;
@@ -207,6 +247,7 @@ public static class LatencyProbeSceneSetup
         // HUD テキスト
         GameObject hudTextGo = CreateChild(hudGo, "HUDText");
         var hudText = hudTextGo.AddComponent<TextMeshProUGUI>();
+        hudText.font = LoadAssetByGuid<TMP_FontAsset>(GUID_FONT_EMPTY_SDF);
         hudText.fontSize = 27;
         hudText.color = Color.white;
         hudText.alignment = TextAlignmentOptions.Center;
