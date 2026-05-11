@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: TeleportLatencyProbe
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 44daa4eb51fc4c24c9a06b4d97cd7ec4,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 78c7a2d7d93cfeb4896ef414f34de85b,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -21,7 +21,7 @@ MonoBehaviour:
   compiledVersion: 2
   behaviourSyncMode: 4
   hasInteractEvent: 0
-  scriptID: 8584917897468587396
+  scriptID: 8665961139180430705
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: ProbeDisplay, VRCAvatarLatencyProbe
+      Data: PasocomMate.VRCAvatarLatencyProbe.ProbeDisplay, PasocomMate.VRCAvatarLatencyProbe
     - Name: 
       Entry: 8
       Data: 

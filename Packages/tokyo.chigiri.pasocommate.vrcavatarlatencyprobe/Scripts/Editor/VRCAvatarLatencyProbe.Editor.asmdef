@@ -2,7 +2,7 @@
     "name": "VRCAvatarLatencyProbe.Editor",
     "rootNamespace": "",
     "references": [
-        "VRCAvatarLatencyProbe",
+        "PasocomMate.VRCAvatarLatencyProbe",
         "UdonSharp.Runtime",
         "UdonSharp.Editor",
         "VRC.Udon",

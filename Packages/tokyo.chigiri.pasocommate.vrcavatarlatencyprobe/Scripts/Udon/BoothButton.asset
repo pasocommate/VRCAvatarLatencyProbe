@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c333ccfdd0cbdbc4ca30cef2dd6e6b9b, type: 3}
   m_Name: BoothButton
   m_EditorClassIdentifier: 
-  serializedUdonProgramAsset: {fileID: 11400000, guid: 8c56fa304f2fa5b488f06ab3e792f072,
+  serializedUdonProgramAsset: {fileID: 11400000, guid: 84bffb7b9d309bc4285ba243514de47c,
     type: 2}
   udonAssembly: 
   assemblyError: 
@@ -21,7 +21,7 @@ MonoBehaviour:
   compiledVersion: 2
   behaviourSyncMode: 2
   hasInteractEvent: 1
-  scriptID: 1387506826796728213
+  scriptID: 315656124593682763
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
@@ -62,7 +62,7 @@ MonoBehaviour:
       Data: 3|System.RuntimeType, mscorlib
     - Name: 
       Entry: 1
-      Data: TeleportLatencyProbe, VRCAvatarLatencyProbe
+      Data: PasocomMate.VRCAvatarLatencyProbe.TeleportLatencyProbe, PasocomMate.VRCAvatarLatencyProbe
     - Name: 
       Entry: 8
       Data: 
