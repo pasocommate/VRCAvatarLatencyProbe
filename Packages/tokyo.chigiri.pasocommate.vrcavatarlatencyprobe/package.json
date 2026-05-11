@@ -10,6 +10,7 @@
   },
   "gitDependencies": {},
   "vpmDependencies": {
-    "com.vrchat.worlds": ">=3.10.2"
+    "com.vrchat.worlds": ">=3.10.2",
+    "net.narazaka.vrchat.tmp-fallback-fonts-jp": ">=1.0.0"
   }
 }
